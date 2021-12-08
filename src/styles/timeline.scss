@@ -1,0 +1,217 @@
+.timelinepage{
+    box-sizing: border-box;
+    padding-top: 57px;
+} 
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background-color: #e2e2e2;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: -3px;
+  background-color: #e2e2e2;
+  /* border: 4px solid #1ec154; */
+  top: 27px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid #6d6d6d;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #eff3f3 transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -7px;
+}
+
+/* The actual content */
+.content-box {
+  padding: 16px;
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 1px 1px 8px 1px #92929240;
+  color: #000;
+}
+
+/* The actual content */
+.content-box-disable {
+  padding: 16px;
+  background-color: #f1f5ed;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px #61616140;
+  }
+
+.content-box-item__title {
+  padding-bottom: 4px;
+  display: inherit;
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 8px;
+  font-weight: bolder;
+  color: #165d16;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+/* Place the timelime to the left */
+  .timeline::after {
+    left: 31px;
+  }
+
+/* Full-width containers */
+  .container {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 20px;
+  }
+
+/* Make sure that all arrows are pointing leftwards */
+  .left::before {
+    left: 40px;
+    border: medium solid #979c8f;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #fff transparent transparent;
+  }
+
+    /* Make sure that all arrows are pointing leftwards on container right */
+    .right::before {
+      left: 40px;
+      border: medium solid #6d6d6d;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #eff3f3 transparent transparent;
+  }
+
+/* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+    left: 24px;
+  }
+
+/* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
+  }
+}
+
+.grid__nilai{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.grid__nilai p{
+  padding-top: 8px;
+}
+
+.nilai {
+  font-size:xx-large;
+  font-weight: bolder;
+}
+
+.nilai__with-remidial {
+  font-size:medium;
+  color: #424242;
+}
+
+.lulus {
+  color: rgb(0, 165, 74);
+}
+
+.remidi {
+  color: rgb(240, 96, 0);
+}
+
+.feedback{
+  font-weight:bolder;
+  font-size: 12px;
+  padding: 8px 4px;
+  text-align: center;
+}
+.nilai_feedback {
+  border-top: 1px solid #eeeeee;
+  padding-top: 12px;
+}
+
+.nilai_feedback__titile {
+  font-weight:bolder;
+  font-size: 10px;
+  color: #37b6dc;
+}
+.nilai_feedback__titile .material-icons{
+  font-size: 12px;
+  vertical-align: text-top !important;
+}
+
+.nilai_feedback__desc {
+  padding-top: 4px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.right-border {
+  border-right: 1px solid #e0e6e8;
+}
