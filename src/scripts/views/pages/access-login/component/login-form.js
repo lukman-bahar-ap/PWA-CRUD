@@ -19,8 +19,8 @@ class LoginForm extends HTMLElement {
       </figure>
       <div class="form-group">
 
-        <input type="text" id="reqNisn" name="reqNisn" 
-        aria-label="NISN" placeholder="NISN">
+        <input type="text" id="reqUsername" name="reqUsername" 
+        aria-label="Username" placeholder="Username">
 
       </div>
       <div class="form-group">

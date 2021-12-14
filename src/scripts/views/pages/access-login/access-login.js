@@ -9,7 +9,7 @@ const AccessLogin = {
   async init() {
     // this.appbar = document.querySelector('.appbar');
     this.togglePassword = document.querySelector('#togglePassword');
-    this.inputNisn = document.querySelector('#reqNisn');
+    this.inputUsername = document.querySelector('#reqUsername');
     this.inputPassword = document.querySelector('#reqPassword');
     this.btnLogin = document.querySelector('#btnLogin');
     this.notifElement = document.querySelector('notif-green-elm');
@@ -49,7 +49,7 @@ const AccessLogin = {
 
       await loginButtonPresenter.init({
         mode: 'login',
-        nisn: this.inputNisn.value,
+        username: this.inputUsername.value,
         password: this.inputPassword.value,
         idb: DiginasIdb,
         authSource: AuthSource,
@@ -57,21 +57,21 @@ const AccessLogin = {
       });
       return this.clearInput();
     }
-    return this.notifElement.notif = 'NISN dan Password harus terisi';
+    return this.notifElement.notif = 'Username and Password required';
   },
 
   isRequiered() {
-    return !(this.inputNisn.value === '' || this.inputPassword.value === '');
+    return !(this.inputUsername.value === '' || this.inputPassword.value === '');
   },
 
   clearInput() {
-    this.inputNisn.value = '';
+    this.inputUsername.value = '';
     this.inputPassword.value = '';
     this.disableInput(false);
   },
 
   disableInput(b) {
-    this.inputNisn.disabled = b;
+    this.inputUsername.disabled = b;
     this.inputPassword.disabled = b;
     this.btnLogin.disabled = b;
   },

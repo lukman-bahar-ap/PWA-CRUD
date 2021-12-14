@@ -3,27 +3,22 @@ import API_HELPER from '../globals/api-helper';
 import DiginasIdb from './diginas-idb';
 
 class DataSource {
+  // new
   static async getCredentialFromDb() {
     const data = await DiginasIdb.getAllUsers();
     /* ambil urutan req pertama karena isinya hanya 1 rec.
     kemudian ambil field PESERTA_DIDIK_ID aja untuk kebutuhan parsing ke server */
-    return data[0].PESERTA_DIDIK_ID;
+    return data[0].IDLOG;
   }
 
   static async getProfilFromDb() {
     const data = await DiginasIdb.getAllUsers();
     /* ambil urutan req pertama karena isinya hanya 1 rec. */
-    return { id: data[0].PESERTA_DIDIK_ID, nisn: data[0].NISN, kelasid: data[0].KELAS_ID };
-  }
-
-  static async getAkademikFromDb() {
-    const data = await DiginasIdb.getAkademik();
-    /* ambil urutan req pertama karena isinya hanya 1 rec. */
     return {
-      id: data[0].PESERTA_DIDIK_ID,
-      kkm: data[0].KKM,
-      krsId: data[0].KRS_MASTER_ID,
-      pesertaKrsId: data[0].PESERTA_DIDIK_KRS_ID,
+      userId: data[0].USER_ID,
+      username: data[0].USERNAME,
+      loginId: data[0].IDLOG,
+      hk: data[0].H_AKSES,
     };
   }
 
@@ -42,23 +37,54 @@ class DataSource {
     return json.results ? json.results : false;
   }
 
+  static async historiTicket() {
+    const profil = await this.getProfilFromDb();
+    const id = await profil.userId;
+    const hk = await profil.hk;
+    // cek hak akses apakah user atau IT ?
+    const URL = (hk === '1') ? `${API_ENDPOINT.HISTORY_USER}?id=${id}&hk=${hk}` : `${API_ENDPOINT.HISTORY}?id=${id}`;
+
+    const response = await fetch(URL);
+    const result = await this.resultByPassCheck(response);
+    return result;
+  }
+
+  static async password(data) {
+    const profil = await this.getProfilFromDb();
+    const hk = await profil.hk;
+    let id = await profil.loginId;
+    // cek hak akses apakah user atau IT ?
+    let URL = API_ENDPOINT.CHANGEPASS;
+    if (hk === '1') {
+      URL = API_ENDPOINT.CHANGEPASS_USER;
+      id = await profil.userId;
+    }
+    const requirement = { ...data, id, hk };
+    const response = await fetch(URL, API_HELPER.optionForm(requirement));
+    const result = await this.resultPromise(response);
+    return result;
+  }
+
+  static async sendComplaint(data) {
+    const profil = await this.getProfilFromDb();
+    const hk = await profil.hk;
+    const idLogin = await profil.loginId;
+    const idUser = await profil.userId;
+
+    const requirement = {
+      ...data, idLogin, idUser, hk,
+    };
+    const response = await fetch(API_ENDPOINT.CREATE_TICKET, API_HELPER.optionForm(requirement));
+    const result = await this.resultPromise(response);
+    return result;
+  }
+
+  // old
   static async dashboard() {
     const id = await this.getCredentialFromDb();
     const URL = `${API_ENDPOINT.DASHBOARD}?id=${id}`;
     const response = await fetch(URL);
     const result = await this.resultPromise(response);
-    return result;
-  }
-
-  static async ukbm() {
-    const profil = await this.getAkademikFromDb();
-    const id = await profil.id;
-    const krsId = await profil.krsId;
-
-    const URL = `${API_ENDPOINT.UKBM}?id=${id}&krs=${krsId}`;
-    const response = await fetch(URL);
-    // const response = await fetch(API_ENDPOINT.UKBM, API_HELPER.optionForm({ id, krsId }));
-    const result = await this.resultByPassCheck(response);
     return result;
   }
 
@@ -84,28 +110,6 @@ class DataSource {
     const response = await fetch(URL);
     // const response = await fetch(API_ENDPOINT.KD, API_HELPER.optionForm({ krsId }));
     const result = await this.resultByPassCheck(response);
-    return result;
-  }
-
-  static async histori() {
-    const profil = await this.getAkademikFromDb();
-    const id = await profil.id;
-    const krsId = await profil.krsId;
-
-    const URL = `${API_ENDPOINT.HISTORY}?id=${id}&krs=${krsId}`;
-    const response = await fetch(URL);
-    // const response = await fetch(API_ENDPOINT.HISTORY, API_HELPER.optionForm({ id, krsId }));
-    const result = await this.resultByPassCheck(response);
-    return result;
-  }
-
-  static async password(data) {
-    const profil = await this.getProfilFromDb();
-    const nisn = await profil.nisn;
-
-    const requirement = { ...data, nisn };
-    const response = await fetch(API_ENDPOINT.CHANGEPASS, API_HELPER.optionForm(requirement));
-    const result = await this.resultPromise(response);
     return result;
   }
 
@@ -148,7 +152,7 @@ class DataSource {
 
   static async notif() {
     const profil = await this.getProfilFromDb();
-    const id = await profil.id;
+    const id = await profil.userId;
     const kelasId = await profil.kelasid;
 
     const response = await fetch(API_ENDPOINT.NOTIF, API_HELPER.optionForm({ id, kelasId }));
@@ -158,7 +162,7 @@ class DataSource {
 
   static async notifDashboard() {
     const profil = await this.getProfilFromDb();
-    const id = await profil.id;
+    const id = await profil.userId;
     const kelasId = await profil.kelasid;
 
     const response = await fetch(API_ENDPOINT.NOTIF_DASHBOARD,

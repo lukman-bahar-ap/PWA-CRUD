@@ -40,9 +40,9 @@ class HeroElement extends HTMLElement {
               <p>pada semester ${semester} </p>
               <p>kelas : ${kelas} </p>
               <p class="hero-item__history">
-                  <a href="#/histori" aria-label="Riwayat" accesskey="r">
+                  <a href="#/complaintform" aria-label="Riwayat" accesskey="r">
                     <span class="link-border">
-                      Riwayat Nilai
+                      Add Complaint
                     </span>
                   </a>
               </p>

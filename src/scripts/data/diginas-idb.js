@@ -10,7 +10,7 @@ const {
 const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
   upgrade(database) {
     database.createObjectStore(OBJECT_STORE_AKADEMIK, { keyPath: 'KRS_MASTER_ID' });
-    database.createObjectStore(OBJECT_STORE_USER, { keyPath: 'NISN' });
+    database.createObjectStore(OBJECT_STORE_USER, { keyPath: 'IDLOG' });
     database.createObjectStore(OBJECT_STORE_UKBM, { keyPath: 'KRS_ID' });
     database.createObjectStore(OBJECT_STORE_PROFIL, { keyPath: 'FIELD' });
     database.createObjectStore(OBJECT_STORE_NOTIF, { keyPath: 'NOTIFIKASI_ID' });
@@ -60,20 +60,20 @@ const DiginasIdb = {
     return (await dbPromise).clear(OBJECT_STORE_AKADEMIK);
   },
   // USER
-  async getUser(nisn) {
-    if (!nisn) {
+  async getUser(idlogin) {
+    if (!idlogin) {
       return false;
     }
-    return (await dbPromise).get(OBJECT_STORE_USER, nisn);
+    return (await dbPromise).get(OBJECT_STORE_USER, idlogin);
   },
   async putUser(User) {
-    if (!User.hasOwnProperty('NISN')) {
+    if (!User.hasOwnProperty('IDLOG')) {
       return false;
     }
     return (await dbPromise).put(OBJECT_STORE_USER, User);
   },
-  async deleteUser(nisn) {
-    return (await dbPromise).delete(OBJECT_STORE_USER, nisn);
+  async deleteUser(idlogin) {
+    return (await dbPromise).delete(OBJECT_STORE_USER, idlogin);
   },
   async getAllUsers() {
     return (await dbPromise).getAll(OBJECT_STORE_USER);

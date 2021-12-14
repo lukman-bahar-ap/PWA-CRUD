@@ -16,7 +16,7 @@ class Auth {
     const data = await DiginasIdb.getAllUsers();
     /* import main if have data and should have field peserta_didik_id > 0 */
     /* use return and (if condition) ? true : false */
-    return (data.length > 0 && data[0].PESERTA_DIDIK_ID > 0)
+    return (data.length > 0 && data[0].IDLOG > 0)
       ? import('../main')
         .then((module) => module.default)
         .then((Main) => {

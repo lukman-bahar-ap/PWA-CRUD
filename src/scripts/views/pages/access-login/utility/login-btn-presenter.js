@@ -1,9 +1,9 @@
 const LoginButtonPresenter = {
   async init({
-    mode, nisn, password, idb, authSource, notif,
+    mode, username, password, idb, authSource, notif,
   }) {
     this._mode = mode;
-    this._nisn = nisn;
+    this._username = username;
     this._password = password;
     this._idb = idb;
     this._authSource = authSource;
@@ -14,8 +14,10 @@ const LoginButtonPresenter = {
   async initParameters() {
     const dataInput = {
       mode: this._mode,
-      nisn: this._nisn,
+      username: this._username,
       password: this._password,
+      token: '',
+      device: 'browser',
     };
     await this.sendAuth(dataInput);
   },
@@ -35,7 +37,7 @@ const LoginButtonPresenter = {
         this._notif.notif = data.INFO;
       }
     } catch (message) {
-      this._notif.notif = ' mohon dicoba lagi nanti atau hubungi admin';
+      this._notif.notif = ' please try again later or call helpdesk';
     }
   },
 

@@ -138,18 +138,6 @@ module.exports = {
             },
           },
         },
-        // {
-        //   urlPattern: /^https:\/\/mtsn2jember-diginas\.com\/(?:(api-apps|search|detail))/,
-        //   // Apply a cache-first strategy.
-        //   handler: 'NetworkFirst',
-        //   options: {
-        //     // Use a custom cache name.
-        //     cacheName: 'diginas-api',
-        //     expiration: {
-        //       maxAgeSeconds: 24 * 60 * 60 * 365,
-        //     },
-        //   },
-        // },
         {
           urlPattern: /.*https:\/\/mtsn2jember-diginas\.com/,
           // Apply a cache-first strategy.
