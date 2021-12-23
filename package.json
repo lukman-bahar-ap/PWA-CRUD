@@ -1,7 +1,7 @@
 {
-  "name": "diginas1",
+  "name": "selfdesk1",
   "version": "1.0.0",
-  "description": "Diginas - Digitalisasi Nilai SKS Sekolah",
+  "description": "SELFDESK - Case Management System",
   "main": "index.js",
   "scripts": {
     "start-dev": "webpack-dev-server --config webpack.dev.js",
