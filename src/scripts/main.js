@@ -1,16 +1,13 @@
 import './views/components/skip-to-content';
 import './views/components/app-bar';
 import './views/components/footer-elm';
-import './views/components/bottom-nav';
 import './views/components/toast-elm';
 import '../styles/main.scss';
 import '../styles/hero.scss';
 import '../styles/progressbar.scss';
-import '../styles/bottom-nav.scss';
 import '../styles/circle.scss';
 import '../styles/timeline.scss';
 import '../styles/form.scss';
-import transparentAppbar from './utils/scrolled';
 import App from './views/app';
 
 const Main = () => {
@@ -34,17 +31,6 @@ const Main = () => {
       .catch((error) => new Error(error));
 
     app.renderPage();
-  });
-
-  window.addEventListener('scroll', () => {
-    transparentAppbar();
-  });
-  document.querySelector('#logout').addEventListener('click', (e) => {
-    e.preventDefault();
-    import('./utils/exit-app')
-      .then((module) => module.default)
-      .then((exitApp) => exitApp())
-      .catch((error) => new Error(error));
   });
 };
 

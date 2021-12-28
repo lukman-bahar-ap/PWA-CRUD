@@ -5,14 +5,9 @@ const CONFIG = {
   SERV_URL: 'https://mtsn2jember-diginas.com/selfdesk/',
   BASE_IMAGE_URL_SMALL: 'https://mtsn2jember-diginas.com/selfdesk/ui-informasi/foto/',
   BASE_IMAGE_URL: 'https://mtsn2jember-diginas.com/selfdesk/ui-informasi/foto/',
-  DATABASE_NAME: 'selfdesk-db',
+  DATABASE_NAME: 'db-crud',
   DATABASE_VERSION: 2,
-  OBJECT_STORE_AKADEMIK: 'akademik',
-  OBJECT_STORE_USER: 'userlogin',
-  OBJECT_STORE_UKBM: 'ukbm',
-  OBJECT_STORE_NILAI: 'nilai',
-  OBJECT_STORE_PROFIL: 'profil',
-  OBJECT_STORE_NOTIF: 'notif',
+  OBJECT_STORE_NOTE: 'note',
   APP_VERSION: 1,
 };
 

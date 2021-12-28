@@ -1,15 +1,15 @@
-import './component/hero-elm';
 import '../../components/ukbm-list';
 import '../../components/ukbm-item-skeleton';
 import '../../components/notif-red-elm';
+import '../../components/floating-button';
 import DataSource from '../../../data/data-source';
 
 const Home = {
   async init() {
     this.ukbmListElement = document.querySelector('ukbm-list');
     this.mainContent = document.querySelector('#main-content');
-    this.heroElement = document.querySelector('hero-elm');
     this.msgSpan = document.getElementById('msgSpan');
+    this.searchElement = document.querySelector('search-bar');
 
     const profil = await DataSource.getProfilFromDb();
     this.userId = await profil.userId;
@@ -18,11 +18,12 @@ const Home = {
 
   async render() {
     return `
-    <hero-elm></hero-elm>
     <section class="content latest">
+        <search-bar></search-bar>
         <ukbm-list class="posts">
             <ukbm-item-skeleton></ukbm-item-skeleton>
         </ukbm-list>
+        <floating-btn-elm></floating-btn-elm>
     </section>
       `;
   },
@@ -44,6 +45,7 @@ const Home = {
     // console.table(listData);
     if (listData) {
       await this.showDataToList(listData, 'Problem loaded data, try again later');
+      await this.searchButton(listData);
     } else {
       const IMG = await this.loadImg();
       this.mainContent.innerHTML = `<img width="100%" src="${IMG.NOT_FOUND}" alt="connection error, try again later">`;
@@ -64,6 +66,19 @@ const Home = {
     } catch {
       this.ukbmListElement.renderError(error);
     }
+  },
+
+  async searchButton(data) {
+    const mapelSearch = async () => {
+      const filtered = await DiginasIdb.getByMapel(data, this.searchElement.value);
+
+      this.showFilterToList(
+        filtered,
+        `tidak menemukan mata pelajaran ${this.searchElement.value}`,
+      );
+    };
+
+    this.searchElement.clickEvent = mapelSearch;
   },
 
 };

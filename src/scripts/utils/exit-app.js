@@ -12,22 +12,6 @@ const exitApp = async () => {
       )),
     );
   });
-  // CacheStorage.delete()('diginas-mtsn2jbr-v2');
-  // cacheStorage.clear();
-  // sessionStorage.clear();
-  // indexedDB.close();
-  /* clear element appbar and bottom nav */
-  // const PARAMS = {
-  //   mode: 'logout',
-  //   id: 'KKDJWO334JRRJ94000XS0Q2',
-  // };
-  // const data = await AuthSource.logout(PARAMS);
-  // if (!data.SUCCESS) {
-  //   const appBarElement = document.querySelector('app-bar');
-  //   const bottomNavElement = document.querySelector('bottom-nav');
-  //   appBarElement.unRender();
-  //   bottomNavElement.unRender();
-  // }
 
   window.location.href = '#/';
   setTimeout(() => {

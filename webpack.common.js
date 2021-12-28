@@ -89,9 +89,9 @@ module.exports = {
       ],
     }),
     new WebpackPwaManifest({
-      name: 'DIGINAS',
-      short_name: 'DIGINAS',
-      description: 'Diginas - MTsN 2 Jember',
+      name: 'PWA Base Project CRUD',
+      short_name: 'PWA CRUD',
+      description: 'PWA Base Project CRUD',
       background_color: '#118329',
       theme_color: '#118329',
       display: 'standalone',
@@ -120,7 +120,7 @@ module.exports = {
       skipWaiting: true,
       clientsClaim: true,
       ignoreURLParametersMatching: [/.*/],
-      cacheId: 'diginas-mtsn2jbr-v2',
+      cacheId: 'pwa-crud-v1',
       // Define runtime caching rules.
       runtimeCaching: [
         {

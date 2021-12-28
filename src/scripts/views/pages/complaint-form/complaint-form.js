@@ -1,4 +1,3 @@
-import '../access-login/style/login.scss';
 import './component/create-ticket-form';
 import DataSource from '../../../data/data-source';
 import launchToast from '../../../utils/toast';

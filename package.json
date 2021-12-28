@@ -1,7 +1,7 @@
 {
-  "name": "selfdesk1",
+  "name": "baseprjectcud",
   "version": "1.0.0",
-  "description": "SELFDESK - Case Management System",
+  "description": "PWA Base Project CRUD",
   "main": "index.js",
   "scripts": {
     "start-dev": "webpack-dev-server --config webpack.dev.js",

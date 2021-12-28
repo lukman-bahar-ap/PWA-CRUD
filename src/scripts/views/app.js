@@ -31,18 +31,6 @@ class App {
     await page.afterRender();
   }
 
-  async transparentAppBar(url) {
-    window.scrollTo(0, 0);
-
-    if (url === '/krs' || url === '/home' || url === '/') {
-      if (document.querySelector('.scrolled') !== null) {
-        this._appbar.classList.remove('scrolled');
-      }
-    } else if (document.querySelector('.scrolled') === null) {
-      this._appbar.classList.add('scrolled');
-    }
-  }
-
   async renderPage() {
     const _UrlParser = await import('../routes/url-parser')
       .then((module) => module.default)
@@ -54,7 +42,6 @@ class App {
       .then((Routes) => {
         const page = Routes[url];
         this.transactionPage(page);
-        this.transparentAppBar(url);
       })
       .catch((error) => new Error(error));
   }
@@ -66,7 +53,6 @@ class App {
       .then((Routes) => {
         const page = Routes[_url];
         this.transactionPage(page);
-        this.transparentAppBar(_url);
       })
       .catch((error) => new Error(error));
   }
