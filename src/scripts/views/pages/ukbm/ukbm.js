@@ -59,21 +59,6 @@ const Ukbm = {
     }
   },
 
-  // async loadAllMapel(mapel) {
-  //   if (mapel) {
-  //     const content = {
-  //       data: mapel,
-  //       error: 'Problem loaded data, try again later',
-  //       element: this.ukbmListElement,
-  //     };
-  //     await addToList.init(content);
-  //   } else {
-  //     const IMG = await this.loadImg();
-  //     this.mainContent.innerHTML = `<img width="100%" src="${IMG.NOT_FOUND}"
-  // alt="connection error, try again later">`;
-  //   }
-  // },
-
   async searchButton(data) {
     const mapelSearch = async () => {
       const filtered = await DiginasIdb.getByMapel(data, this.searchElement.value);

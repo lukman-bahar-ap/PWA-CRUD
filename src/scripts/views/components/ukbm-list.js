@@ -2,7 +2,8 @@ import './ukbm-item';
 
 class UkbmList extends HTMLElement {
   set list(list) {
-    this._list = list;
+    this._list = list.data;
+    this._hk = list.hk;
     this.render();
   }
 
@@ -12,7 +13,7 @@ class UkbmList extends HTMLElement {
 
   _addItem(item) {
     const ukbmItemElement = document.createElement('ukbm-item');
-    ukbmItemElement.ukbm = item;
+    ukbmItemElement.ukbm = { item, hk: this._hk };
     this.appendChild(ukbmItemElement);
   }
 

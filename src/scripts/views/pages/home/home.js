@@ -10,15 +10,16 @@ const Home = {
     this.mainContent = document.querySelector('#main-content');
     this.heroElement = document.querySelector('hero-elm');
     this.msgSpan = document.getElementById('msgSpan');
+
+    const profil = await DataSource.getProfilFromDb();
+    this.userId = await profil.userId;
+    this.privellage = await profil.hk;
   },
 
   async render() {
     return `
     <hero-elm></hero-elm>
     <section class="content latest">
-        <div class="head-section">
-            <h2 class="align__header">Proses UKBM</h2>
-        </div>
         <ukbm-list class="posts">
             <ukbm-item-skeleton></ukbm-item-skeleton>
         </ukbm-list>
@@ -28,7 +29,7 @@ const Home = {
 
   async afterRender() {
     await this.init();
-    await this.loadTicket();
+    await this.loadTicket(this.privellage);
   },
 
   async loadImg() {
@@ -38,8 +39,9 @@ const Home = {
       .catch((error) => new Error(error));
   },
 
-  async loadTicket() {
-    const listData = await DataSource.historiTicket();
+  async loadTicket(privellage) {
+    const listData = await this.selectLoadMatchPrivellage(privellage);
+    // console.table(listData);
     if (listData) {
       await this.showDataToList(listData, 'Problem loaded data, try again later');
     } else {
@@ -48,9 +50,17 @@ const Home = {
     }
   },
 
+  async selectLoadMatchPrivellage(privellage) {
+    switch (privellage) {
+      case '1': return DataSource.historiTicket(this.userId, this.privellage);
+      case '2': return DataSource.openTicket(this.userId);
+      default: return DataSource.statusTicket(this.userId);
+    }
+  },
+
   async showDataToList(data, error) {
     try {
-      this.ukbmListElement.list = data;
+      this.ukbmListElement.list = { data, hk: this.privellage };
     } catch {
       this.ukbmListElement.renderError(error);
     }

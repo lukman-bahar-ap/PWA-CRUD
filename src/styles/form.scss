@@ -25,7 +25,7 @@
     margin-bottom: 7px;
 }
 
-.form_group > input {
+.form_group > input, select, textarea {
     border: solid 1px #d6d6d6;
     outline: 0;
     font-family: "Montserrat", sans-serif;
@@ -39,13 +39,13 @@
     border-radius: 5px;
 }
 
-.form_group > input:focus {
+.form_group > input:focus, select:focus, textarea:focus {
     outline: 0;
     border: solid 1px #1e8d89;
     background-color: #fff;
 }
 
-.form_group > input:focus::placeholder {
+.form_group > input:focus::placeholder, textarea:focus::placeholder {
     font-weight: bolder;
 }
 

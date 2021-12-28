@@ -12,6 +12,12 @@ const API_ENDPOINT = {
   CHANGEPASS: `${CONFIG.SERV_URL}api-mobile/change_pass.php`,
   CHANGEPASS_USER: `${CONFIG.SERV_URL}api-mobile/change_pass_user.php`,
   CREATE_TICKET: `${CONFIG.SERV_URL}api-mobile/create_ticket.php`,
+  LIST_DELEGATION_TICKET: `${CONFIG.SERV_URL}api-mobile/status_tiket_json.php`,
+  LIST_OPEN_TICKET: `${CONFIG.SERV_URL}api-mobile/monitoring_tiket_json.php`,
+  POST_TICKET: `${CONFIG.SERV_URL}api-mobile/submit_status_tiket.php`,
+  DETAIL_TICKET_IT: `${CONFIG.SERV_URL}api-mobile/detail_ticket_it_json.php`,
+  DETAIL_TICKET_HELPDESK: `${CONFIG.SERV_URL}api-mobile/detail_ticket_helpdesk_json.php`,
+
   // old
   DASHBOARD: `${CONFIG.SERV_URL}api-mobile/dashboard_json.php`,
   KRS_REGISTER_FORM: `${CONFIG.SERV_URL}api-mobile/registrasi_krs.php`,

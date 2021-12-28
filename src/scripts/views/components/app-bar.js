@@ -30,7 +30,7 @@ class AppBar extends HTMLElement {
                     <i class="material-icons">menu</i>
                 </button>
                 <div class="header__inner">
-                    <h1>DIGINAS MTsN 2 Jember</h1>
+                    <h1>Selfdesk</h1>
                 </div>
                 <nav id="drawer" class="nav">
                     <ul class="nav__list" aria-label="navigation menu">

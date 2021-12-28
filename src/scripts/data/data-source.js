@@ -37,13 +37,32 @@ class DataSource {
     return json.results ? json.results : false;
   }
 
-  static async historiTicket() {
-    const profil = await this.getProfilFromDb();
-    const id = await profil.userId;
-    const hk = await profil.hk;
+  static async resultAll(response) {
+    const json = await response.json();
+    return json;
+  }
+
+  static async historiTicket(id, hk) {
+    // const profil = await this.getProfilFromDb();
+    // const id = await profil.userId;
+    // const hk = await profil.hk;
     // cek hak akses apakah user atau IT ?
     const URL = (hk === '1') ? `${API_ENDPOINT.HISTORY_USER}?id=${id}&hk=${hk}` : `${API_ENDPOINT.HISTORY}?id=${id}`;
 
+    const response = await fetch(URL);
+    const result = await this.resultByPassCheck(response);
+    return result;
+  }
+
+  static async statusTicket(id) {
+    const URL = `${API_ENDPOINT.LIST_DELEGATION_TICKET}?id=${id}`;
+    const response = await fetch(URL);
+    const result = await this.resultByPassCheck(response);
+    return result;
+  }
+
+  static async openTicket(id) {
+    const URL = `${API_ENDPOINT.LIST_OPEN_TICKET}?id=${id}`;
     const response = await fetch(URL);
     const result = await this.resultByPassCheck(response);
     return result;
@@ -76,6 +95,34 @@ class DataSource {
     };
     const response = await fetch(API_ENDPOINT.CREATE_TICKET, API_HELPER.optionForm(requirement));
     const result = await this.resultPromise(response);
+    return result;
+  }
+
+  static async sendUpdate(data) {
+    const profil = await this.getProfilFromDb();
+    const hk = await profil.hk;
+    const idLogin = await profil.loginId;
+    const idUser = await profil.userId;
+
+    const requirement = {
+      ...data, idLogin, idUser, hk,
+    };
+    const response = await fetch(API_ENDPOINT.POST_TICKET, API_HELPER.optionForm(requirement));
+    const result = await this.resultPromise(response);
+    return result;
+  }
+
+  static async detailTicketIT(id) {
+    const URL = `${API_ENDPOINT.DETAIL_TICKET_IT}?reqId=${id}`;
+    const response = await fetch(URL);
+    const result = await this.resultByPassCheck(response);
+    return result;
+  }
+
+  static async detailTicketHelpdesk(id) {
+    const URL = `${API_ENDPOINT.DETAIL_TICKET_HELPDESK}?reqId=${id}`;
+    const response = await fetch(URL);
+    const result = await this.resultByPassCheck(response);
     return result;
   }
 
